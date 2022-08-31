@@ -1,0 +1,14 @@
+{% extends 'Papers/base.html' %}
+
+{% block title %}{{ blogName }}{% endblock %}
+
+{% block page_header %}
+            <h1 class='display-6'>{{ post|title }}</h1>
+{% endblock page_header %}
+
+{% block content %}  
+        <div>
+            <p class='lead'> {{ post.content|linebreaksbr }}</p>
+        </div>
+{% endblock content %}
+

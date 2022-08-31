@@ -1,0 +1,24 @@
+{% extends 'Papers/base.html' %}
+
+{% block title %}{{ blogName }}{% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ post }}</h3>
+            <small class="text-muted">{{ post.category }} - {{ post.date_added|date:'M d, Y H:i' }}</small>
+        </div>
+    
+        <div class="card-body">
+            <p class="card-text"> {{ post.content|truncatechars:256 }}</p> 
+            <a href="{% url 'Papers:viewPost'  post.id %}" class="btn btn-primary">Read More</a>
+        </div>
+    </div>
+  <br>   
+
+  {% empty %}
+    <h1>Sorry, no posts yet.</h1>
+  {% endfor %}
+{% endblock content %}
