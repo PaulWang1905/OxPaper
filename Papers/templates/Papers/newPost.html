@@ -1,0 +1,31 @@
+{% extends 'Papers/base.html' %}
+    
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+{% block page_header %}
+            <h1 class='display-6'>Add a new post</h1>
+{% endblock page_header %}
+
+{% block content %}
+    
+  
+
+
+<form action="{% url 'Papers:newPost' %}" method='post'>
+    {% csrf_token %}
+    {% bootstrap_form form   %}
+    
+    {% bootstrap_button button_type="submit" content="Save" %}
+    <a class="btn btn-primary" href="{% url 'Papers:index' %}">Cancel</a>
+
+   
+     
+</form>
+
+
+{% endblock content %}

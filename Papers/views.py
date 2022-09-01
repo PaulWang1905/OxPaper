@@ -1,8 +1,9 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import Http404
 from .models import Category, Page, Post
+from .forms import PostForm
 
 
 
@@ -32,9 +33,11 @@ def viewCategory(request,category_id):
 
 def viewPost(request,post_id):
     post  = Post.objects.get(id=post_id)
-    categories = Category.objects.order_by('order')
-    context ={'blogName': settings.BLOGNAME,'categories':categories,'post':post}
+    """if not logged in and the post is not published, raise 404
+    """
     if post.status == 1 or request.user.is_authenticated:
+        categories = Category.objects.order_by('order')
+        context ={'blogName': settings.BLOGNAME,'categories':categories,'post':post}
         return render(request, 'Papers/viewPost.html',context)
     else:
         raise Http404
@@ -42,9 +45,31 @@ def viewPost(request,post_id):
 
 def viewPage(request,page_id):
     page  = Page.objects.get(id=page_id)
-    categories = Category.objects.order_by('order')
-    context ={'blogName': settings.BLOGNAME,'categories':categories,'page':page}
+    """if not logged in and the page is not published, raise 404
+    """
     if page.status == 1 or request.user.is_authenticated:
+        categories = Category.objects.order_by('order')
+        context ={'blogName': settings.BLOGNAME,'categories':categories,'page':page}
         return render(request, 'Papers/viewPost.html',context)
     else:
         raise Http404
+
+
+def newPost(request):
+    if request.user.is_authenticated:
+        categories = Category.objects.order_by('order')
+        """add new post"""
+        if request.method != 'POST':
+            form = PostForm()
+        else:
+            form = PostForm(data=request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('Papers:index')
+        context = {'blogName': settings.BLOGNAME,'categories':categories,'form':form}
+        return render(request,'Papers/newPost.html', context)
+    else:
+        raise Http404
+
+    
+

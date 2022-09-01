@@ -24,7 +24,6 @@ class Category(models.Model):
 class Page(models.Model):
     """In this blog system, everything is a page, except category. This is a base model."""
     title = models.CharField(max_length=200)
-    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_pages")
     abstract = models.TextField()
     content = models.TextField()
@@ -37,7 +36,6 @@ class Page(models.Model):
         return self.title
 
 class Post(Page):
-    
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="posts")
     class Meta:
         verbose_name_plural = 'posts'

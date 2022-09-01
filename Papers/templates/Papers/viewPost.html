@@ -4,9 +4,24 @@
 
 {% block page_header %}
             <h1 class='display-6'>{{ post|title }}</h1>
+            <small class="text-muted">{{ post.author}} - {{ post.category }} - {{ post.date_added|date:'M d, Y H:i' }}</small>
+            
 {% endblock page_header %}
 
-{% block content %}  
+{% block content %}
+        {% if post.status == 0 %}
+        <div class="alert alert-warning" role="alert">
+            This post is not published yet.
+        </div>
+        {% endif %}
+        <div class="alert alert-success" role="alert">
+            
+            
+
+            <p>{{ post.abstract|linebreaksbr }}</p>
+
+
+          </div>
         <div>
             <p class='lead'> {{ post.content|linebreaksbr }}</p>
         </div>
