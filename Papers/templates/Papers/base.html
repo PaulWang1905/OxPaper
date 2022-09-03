@@ -9,6 +9,13 @@
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <style>
+      
+      .top_tab:hover {
+        text-shadow: 2px 2px 4px #000000;
+
+      }
+      </style>
 </head>
 <body class="p-3 m-0 border-0">
     
@@ -22,7 +29,7 @@
             <div class="navbar-nav">
               
                 {% for category in categories %}
-                <a class="nav-link" href="{% url 'Papers:viewCategory'  category.id %}">{{ category }}</a>
+                <a class="nav-link top_tab" href="{% url 'Papers:viewCategory'  category.id %}">{{ category }}</a>
                 {% endfor %} 
 
             </div>
@@ -48,7 +55,7 @@
               </div>
           {% else %}
             <li class="navbar-nav">
-              <a class="nav-link" href="{% url 'Papers:newPost' %}">Login</a></li>
+              <a class="nav-link" href="{% url 'Papers:index' %}">Login</a></li>
           {% endif %}
       </div>
       </nav>

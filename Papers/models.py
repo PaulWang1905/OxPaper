@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
-
+from markdown import markdown
+from django.utils.html import mark_safe
 # Create your models here.
 STATUS =(
     (0,"Draft"),
@@ -31,7 +32,9 @@ class Page(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)   
     class Meta:
         verbose_name_plural = 'pages'
-        ordering= ['-date_added']   
+        ordering= ['-date_added']
+    def get_content_as_markdown(self):
+        return mark_safe(markdown(self.content, safe_mode='escape'))
     def __str__(self):
         return self.title
 

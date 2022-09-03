@@ -1,23 +1,25 @@
 {% extends 'Papers/base.html' %}
-{% block title %}{{ blogName }}{% endblock %}
-
 {% load django_bootstrap5 %}
 
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
+{% block title %}{{ blogName }}{% endblock %}
 
 {% block page_header %}
-            <h1 class='display-6'>Add a new post</h1>
+            <h1 class='display-6'>Edit this post</h1>
 {% endblock page_header %}
 
 {% block content %}
+
+
+
     
   
 
 
-<form action="{% url 'Papers:newPost' %}" method='post'>
+<form action="{% url 'Papers:updatePost' post.id %}" method='post'>
     {% csrf_token %}
     {% bootstrap_form form   %}
     

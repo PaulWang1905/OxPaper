@@ -2,6 +2,11 @@
 
 {% block title %}{{ blogName }}{% endblock %}
 
+{% block page_header %}
+    <h1 class='display-6'>{{ category }}</h1>
+{% endblock page_header %}
+
+
 {% block content %}
 
 {% for post in posts %}
@@ -14,6 +19,36 @@
         <div class="card-body">
             <p class="card-text"> {{ post.content|truncatechars:256 }}</p> 
             <a href="{% url 'Papers:viewPost'  post.id %}" class="btn btn-primary">Read More</a>
+            {% if user.is_authenticated %}
+                    
+                    <a class="btn btn-primary" href="editPost/{{ post.id }}" style="width: 100px;" >Edit</a>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" style="width: 100px;">
+                        Delete
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            Are you sure you want to delete this post?
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="{% url 'Papers:delete'  post.id %}" style="width: 100px;" >OK</a>
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
         </div>
     </div>
   <br>   
