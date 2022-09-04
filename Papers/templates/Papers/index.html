@@ -10,14 +10,16 @@
     
     {% for post in posts %}
         
-            <div class="card">
+            <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                 <div class="card-header">
                     <h3>{{ post }}</h3>
                     <small class="text-muted">{{ post.category }} - {{ post.date_added|date:'M d, Y H:i' }}</small>
                 </div>
             
                 <div class="card-body">
-                    <p class="card-text"> {{ post.content|truncatechars:256 }}</p> 
+                     
+                        <p class="card-text"> {{ post.abstract|truncatechars:100 }}</p> 
+                    
                     <a href="{% url 'Papers:viewPost'  post.id %}" class="btn btn-primary" style="width: 120px;">Read More</a>
                     {% if user.is_authenticated %}
                     

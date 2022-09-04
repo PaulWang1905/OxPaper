@@ -40,6 +40,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'Papers',
     #'ckeditor',
+    'users',
     'django_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',

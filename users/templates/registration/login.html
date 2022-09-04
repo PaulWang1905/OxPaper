@@ -1,0 +1,44 @@
+{% extends 'Papers/base.html' %}
+
+{% block title %}Log in{% endblock %}
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+
+
+{% block page_nav %}
+
+{% endblock page_nav%}
+
+
+{% block page_header %}
+            <h1 class='display-6'>Log in</h1>
+{% endblock page_header %}
+
+
+
+
+{% block content %}
+
+{% if form.errors %}
+    <p>Your username and password did not match. Please try again.</p>
+{% endif %}
+
+<form method='post' action="{% url 'users:login' %}" class="form">
+
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    
+    {% bootstrap_button button_type="submit" content="Log in" %}
+    <a class="btn btn-primary" href="{% url 'Papers:index' %}">Cancel</a>
+    <a class="btn btn-primary" href="{% url 'Papers:index' %}">Forget password?</a>
+
+    <input type="hidden" name="next"
+        value="{% url 'Papers:index' %}" />
+
+</form>
+
+{% endblock content %}
