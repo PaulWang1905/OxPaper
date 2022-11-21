@@ -9,6 +9,7 @@ urlpatterns = [
     path('post/<int:post_id>/',views.viewPost,name='viewPost'),
     path('page/<int:page_id>/',views.viewPage,name='viewPage'),
     path('newPost/',views.newPost,name='newPost'),
-    path('delete/<int:post_id>', views.delete, name='delete'),
-    path('updatePost/<int:post_id>', views.updatePost, name='updatePost'),
+    path('delete/<int:post_id>/', views.delete, name='delete'),
+    path('updatePost/<int:post_id>/', views.updatePost, name='updatePost'),
+    path('manage/',views.manage,name='manage'),
 ]

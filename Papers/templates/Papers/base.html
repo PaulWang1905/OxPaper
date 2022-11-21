@@ -48,7 +48,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="true">Dashboard</a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item " href="{% url 'Papers:newPost' %}">New Post</a></li>
-                      <li><a class="dropdown-item " href="{% url 'Papers:newPost' %}">Manage</a></li>
+                      <li><a class="dropdown-item " href="{% url 'Papers:manage' %}">Manage</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="btn btn-primary dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
                     </ul>
@@ -62,7 +62,7 @@
       </nav>
   </div>
   {% endblock page_nav %}
-    
+     
     <main role="main" class="container">
         <div class="pb-2 mb-2 border-bottom">
             {% block page_header %}{% endblock page_header %}
@@ -70,9 +70,35 @@
         <div>
             {% block content %}
             {% endblock content %}
+            <br>
+            <br>
         </div>
-    </main>
+
+
+        {% block page_footer %}
+        <div class="pt-2 mt-2 border-top">
+            <div class="fixed-bottom">
+              <footer class="footer mt-auto py-3 bg-light">
+                <div class="container">
+                  <span class="text-muted
+                  ">{{ blogName  }} &copy; 2022</span>
+                </div>
+              </footer>
+            </div>
+        </div>     
+        {% endblock page_footer %}
+
+      
+      </main>
+
+       
+
+
+
+
     
+  
+
 </body>
 </html>
 

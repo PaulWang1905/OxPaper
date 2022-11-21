@@ -82,7 +82,8 @@ def newPost(request):
 def delete(request,post_id):
     page  = Page.objects.get(id=post_id)
     page.delete()
-    return HttpResponseRedirect(reverse('Papers:index')) 
+    return HttpResponseRedirect(reverse('Papers:manage')) 
+    #return HttpResponseRedirect(reverse(path)) 
 
 @login_required
 def updatePost(request, post_id):
@@ -96,7 +97,6 @@ def updatePost(request, post_id):
         if form.is_valid():
             form.save()
             return redirect('Papers:viewPost', post_id = post.id)
-
     context = {
         'post': post,
         'categories':categories,
@@ -104,3 +104,17 @@ def updatePost(request, post_id):
         'form':form,
     }
     return render(request,'Papers/updatePost.html', context)
+
+
+@login_required
+def manage(request):
+    categories = Category.objects.order_by('order')
+    posts = Post.objects.order_by('date_added').reverse()
+    context = {
+        'categories':categories,
+        'blogName': settings.BLOGNAME,
+        'posts': posts,
+    }
+
+    return render(request,'Papers/manage.html', context)
+
